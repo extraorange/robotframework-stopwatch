@@ -9,15 +9,30 @@ class Stopwatch(ListenerV3):
     ROBOT_LISTENER_API_VERSION = 3
     ROBOT_LIBRARY_SCOPE = 'GLOBAL'
 
-    def __init__(self, logfile="./stopwatch_history.json", timedelta=120) -> None:
+    def __init__(self, logfile: str ="./stopwatch_history.json", timedelta: str = "60 seconds") -> None:
         self.logfile: str = logfile
-        self.timedelta: int = timedelta
+        self.timedelta: int = self._get_timedelta(timedelta)
         self.environment: str = self._get_environment()
         self.history_json: dict = self._get_history()
         self.test: str
         self.test_average_runtime: int
         self.test_run_data: dict
         self.test_runtime_log: list
+
+    def _get_timedelta(self, timedelta) -> int:
+        digits = []
+        for char in timedelta:
+            if char.isdigit():
+                digits.append(char)
+            else: 
+                break
+        time_value = int("".join(digit for digit in digits))
+        if "h" in timedelta:
+            return time_value * 60 * 60
+        elif "m" in timedelta:
+            return time_value * 60
+        else:
+            return time_value
 
     def _get_environment(self) -> str:
         environment = os.getenv("DevEnvironment")
@@ -54,16 +69,26 @@ class Stopwatch(ListenerV3):
             test_run_id = len(self.test_runtime_log)
             test_run_timestamp = result.start_time.strftime("%d/%m/%y %H:%M:%S") if result.start_time else None
             test_run_status = result.passed
-            test_run_elapsed_time = result.elapsed_time.seconds
+            test_runtime = result.elapsed_time.seconds
             self.test_run_data = {
                 "id": test_run_id,
                 "timestamp": test_run_timestamp,
                 "passed": test_run_status,
-                "runtime": test_run_elapsed_time
+                "runtime": test_runtime,
+                "delta_exceeded": None
             }
 
+        def _evaluate_test_runtime(self) -> None:
+            if self.test_average_runtime:
+                if self.test_run_data["passed"] and self.test_run_data["runtime"] > self.test_average_runtime + self.timedelta:
+                    self.test_run_data["delta_exceeded"] = True
+                    result.passed = False
+                    result.message = "Stopwatch: PASS, but execution exceeded acceptance time delta."
+                else:
+                    self.test_run_data["delta_exceeded"] = False
+
         def _update_test_average_runtime(self) -> None:
-            if self.test_run_data["passed"]:
+            if self.test_run_data["passed"] and not self.test_run_data["delta_exceeded"]:
                 if self.test_average_runtime:
                     self.test_average_runtime = (self.test_run_data["runtime"] + self.test_average_runtime) // 2
                 else:
@@ -76,8 +101,6 @@ class Stopwatch(ListenerV3):
                 json.dump(self.history_json, json_file, indent=4)
 
         _parse_test_run_data(self)
+        _evaluate_test_runtime(self)
         _update_test_average_runtime(self)
         _write_test_run_data(self)
-
-        if self.test_run_data["passed"] and self.test_run_data["runtime"] > self.test_average_runtime + self.timedelta:
-            result.passed = False
