@@ -1,7 +1,7 @@
 __pycache__
 .venv
 .vscode
-*.json
 *.html
+*.json
 *.robot
 *.xml

@@ -1,0 +1,30 @@
+[project]
+name = "robotframework-stopwatch"
+version = "0.2.1"
+description = "Evaluate test case execution against delta."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "GPL-3.0-only" }
+
+authors = [{ name = "extraorange", email = "extraorangeio@pm.me" }]
+
+classifiers = [
+    'Development Status :: 4 - Beta',
+    'Framework :: Robot Framework :: Library',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python :: 3',
+    'Topic :: Software Development :: Testing :: Acceptance',
+    'Topic :: Software Development :: Testing :: BDD',
+    'Topic :: Software Development :: Testing',
+    "Operating System :: OS Independent",
+]
+
+keywords = ["robotframework", "listener", "robot framework", "automation"]
+
+dependencies = ["robotframework>=6.1.1"]
+
+[project.urls]
+"Homepage" = "https://github.com/extraorange/robotframework-stopwatch"
+"Documentation" = "https://github.com/yourusername/robotframework-stopwatch#readme"

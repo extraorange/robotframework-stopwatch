@@ -4,7 +4,7 @@ import os
 from robot import result, running
 from robot.api.interfaces import ListenerV3
 
-class Stopwatch(ListenerV3):
+class StopwatchListener(ListenerV3):
 
     ROBOT_LISTENER_API_VERSION = 3
     ROBOT_LIBRARY_SCOPE = 'GLOBAL'
@@ -36,7 +36,7 @@ class Stopwatch(ListenerV3):
 
     def _get_environment(self) -> str:
         environment = os.getenv("DevEnvironment")
-        return environment.lower() if environment else "www"
+        return environment.lower() if environment else "main"
 
     def _get_history(self) -> dict:
         data_json = {}
