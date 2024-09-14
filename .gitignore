@@ -5,3 +5,5 @@ __pycache__
 *.json
 *.robot
 *.xml
+dist
+src/robotframework_stopwatch.egg-info
