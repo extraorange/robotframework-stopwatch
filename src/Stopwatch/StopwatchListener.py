@@ -83,7 +83,7 @@ class StopwatchListener(ListenerV3):
                 if self.test_run_data["passed"] and self.test_run_data["runtime"] > self.test_average_runtime + self.timedelta:
                     self.test_run_data["delta_exceeded"] = True
                     result.passed = False
-                    result.message = "Stopwatch: PASS, but execution exceeded acceptance time delta."
+                    result.message = "Stopwatch: PASS, but execution exceeded acceptance timedelta."
                 else:
                     self.test_run_data["delta_exceeded"] = False
 

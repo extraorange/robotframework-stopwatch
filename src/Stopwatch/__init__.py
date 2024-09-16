@@ -1,1 +1,1 @@
-from .stopwatch import StopwatchListener
+from .StopwatchListener import StopwatchListener
