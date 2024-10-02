@@ -15,7 +15,7 @@ When first integrated, the ``StopwatchListener`` will initialise an empty logfil
 
 When test with established average runtime fails due to exceeded time limit, test is marked as failed with a following message output:
 
-```shell
+```
 Stopwatch! Test runtime exceeded the acceptable time limit.
 ```
 
