@@ -118,10 +118,10 @@ class StopwatchListener(ListenerV3):
                     self.test_run_data["delta_ok"] = True
 
         def _queue_test_run_data(self) -> None:
-            if self.test_run_data["passed"] and self.test_run_data["delta_ok"]:
-                if self.test_average_runtime:
+            if self.test_average_runtime:
+                if self.test_run_data["passed"] and self.test_run_data["delta_ok"]:
                     self.test_average_runtime = (self.test_run_data["runtime"] + self.test_average_runtime) // 2
-                else:
+            else:
                     self.test_average_runtime = self.test_run_data["runtime"]
             self.log_data[self.test][self.environment]["average_runtime"] = self.test_average_runtime
             self.test_runtime_log.insert(0, self.test_run_data)

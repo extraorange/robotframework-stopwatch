@@ -1,5 +1,5 @@
 # robotframework-stopwatch
-![Version](https://img.shields.io/badge/version-0.2.9-%2392C444)
+![Version](https://img.shields.io/badge/version-0.2.10-%2392C444)
 
 Robot Framework listener extension for agile perfomance testing.
 

@@ -1,6 +1,6 @@
 [project]
 name = "robotframework-stopwatch"
-version = "0.2.9"
+version = "0.2.10"
 description = "Evaluate test case execution against its statistical average run time & user-configured timedelta."
 readme = "README.md"
 requires-python = ">=3.8"
