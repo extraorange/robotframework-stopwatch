@@ -1,7 +1,7 @@
 [project]
 name = "robotframework-stopwatch"
-version = "0.2.5"
-description = "Evaluate test case execution against delta."
+version = "0.2.9"
+description = "Evaluate test case execution against its statistical average run time & user-configured timedelta."
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "GPL-3.0-only" }
@@ -21,7 +21,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
-keywords = ["robotframework", "listener", "robot framework", "automation"]
+keywords = ["robotframework", "listener", "robot framework", "automation", "performance testing"]
 
 dependencies = ["robotframework>=6.1.1"]
 

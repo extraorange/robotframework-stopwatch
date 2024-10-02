@@ -1,1 +1,2 @@
-robotframework==7.0.1
+portalocker
+robotframework
